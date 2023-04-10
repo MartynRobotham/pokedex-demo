@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { PokemonSearch } from './components/pokemon-search/pokemon-search';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {PokemonDetails} from "./components/pokemon-details/pokemon-details";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-      <PokemonDetails />
+      <PokemonSearch />
   </React.StrictMode>
 );
 

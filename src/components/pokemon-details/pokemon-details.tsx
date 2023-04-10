@@ -1,14 +1,8 @@
 import React from 'react';
-import {UseFetchPokemon} from "../../hooks/use-fetch-pokemon";
+import { PokemonApiDetails } from '../../interfaces/common.interfaces';
 
-export const PokemonDetails = () => {
-
-    const [data, loading] = UseFetchPokemon({identifier: "1"})
-
-    if (loading) {
-        return (<span>Loading</span>)
-    }
-
+export const PokemonDetails = (props: {data: PokemonApiDetails}) => {
+    const {data} = props;
     return (
         <React.Fragment>
             <h1>
@@ -21,13 +15,13 @@ export const PokemonDetails = () => {
                 Weight: {`${data?.weight} kg`}
             </h2>
             <div>
-                Abilities: {data?.abilities.map((x: {ability: {name: string}}) => <ul>{x.ability.name}</ul>)}
+                Abilities: {data?.abilities.map((x: { ability: { name: string } }) => <ul>{x.ability.name}</ul>)}
             </div>
             <div>
-                Moves: {data?.moves.map((x: {move: {name: string}}) => <ul>{x.move.name}</ul>)}
+                Moves: {data?.moves.map((x: { move: { name: string } }) => <ul>{x.move.name}</ul>)}
             </div>
             <div>
-                Types: {data?.types.map((x: {type: {name: string}}) => <ul>{x.type.name}</ul>)}
+                Types: {data?.types.map((x: { type: { name: string } }) => <ul>{x.type.name}</ul>)}
             </div>
         </React.Fragment>
     );

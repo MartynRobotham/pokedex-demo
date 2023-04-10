@@ -6,13 +6,13 @@ export const mapPokemonDetails = (details: any) => {
         id: details['id'],
         abilities: details['abilities'],
         // Height response is in decimeters
-        height: (details['height'] * 10),
+        height: (parseFloat(details['height']) * 10),
         moves: details['moves'],
         name: details['name'],
         order: details['order'],
         types: details['types'],
         // Weight response is in hectograms
-        weight: (details['weight'] / 10)
+        weight: (parseFloat(details['weight']) / 10)
     }
     return pokemon;
 }
