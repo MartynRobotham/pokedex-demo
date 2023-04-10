@@ -5,12 +5,14 @@ export const mapPokemonDetails = (details: any) => {
     const pokemon: PokemonApiDetails = {
         id: details['id'],
         abilities: details['abilities'],
-        height: details['height'],
+        // Height response is in decimeters
+        height: (details['height'] * 10),
         moves: details['moves'],
         name: details['name'],
         order: details['order'],
         types: details['types'],
-        weight: details['weight']
+        // Weight response is in hectograms
+        weight: (details['weight'] / 10)
     }
     return pokemon;
 }
