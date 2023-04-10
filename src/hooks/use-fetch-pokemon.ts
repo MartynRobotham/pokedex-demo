@@ -12,7 +12,7 @@ const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
 // to purely show a different JS knowledge approach outside the framework
 export const useFetchPokemon = (params: UseFetchPokemonParams) => {
 
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<PokemonApiDetails | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -27,7 +27,8 @@ export const useFetchPokemon = (params: UseFetchPokemonParams) => {
                     try {
                         fetch(`${BASE_URL}/${encodeURIComponent(params.identifier)}`).then((data) => {
                             data.json().then((res) => {
-                                setData(res)
+                                const pokemon = mapPokemonDetails(res)
+                                setData(pokemon)
                             })
                         });
                     } catch (err) {
@@ -40,7 +41,6 @@ export const useFetchPokemon = (params: UseFetchPokemonParams) => {
                     if (count < 10) {
                         await makeRequest();
                         count += 1;
-                        timerId = setTimeout(handleTimer, 10000);
                     }
                 };
 
