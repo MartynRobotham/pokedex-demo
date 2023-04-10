@@ -29,7 +29,7 @@ export const PokemonDetails = (props: { data: PokemonApiDetails }) => {
     }
 
     useEffect(() => {
-        const result = translateYodaText();
+        translateYodaText();
     }, [yodaEffects]);
 
 
@@ -44,7 +44,7 @@ export const PokemonDetails = (props: { data: PokemonApiDetails }) => {
                     value={'Yoda'}/>
                 <label htmlFor="vehicle1">Show effects in Yoda</label>
             </form>
-            <span>{effectsText}</span>
+            {/*<span>{effectsText}</span>*/}
             <h1>
                 {data?.name}
             </h1>
@@ -55,13 +55,16 @@ export const PokemonDetails = (props: { data: PokemonApiDetails }) => {
                 Weight: {`${data?.weight} kg`}
             </h2>
             <div>
-                Abilities: {data?.abilities.map((x: { ability: { name: string } }) => <ul>{x.ability.name}</ul>)}
+                <h3>Abilities:</h3>
+                {data?.abilities.map((x: { ability: { name: string } }) => <p key={x.ability.name}>{x.ability.name}</p>)}
             </div>
             <div>
-                Moves: {data?.moves.map((x: { move: { name: string } }) => <ul>{x.move.name}</ul>)}
+                <h3>Moves:</h3>
+                {data?.moves.map((x: { move: { name: string } }) => <p key={x.move.name}>{x.move.name}</p>)}
             </div>
             <div>
-                Types: {data?.types.map((x: { type: { name: string } }) => <ul>{x.type.name}</ul>)}
+                <h3>Types:</h3>
+                {data?.types.map((x: { type: { name: string } }) => <p key={x.type.name}>{x.type.name}</p>)}
             </div>
         </React.Fragment>
     );

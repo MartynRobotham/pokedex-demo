@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import { useFetchPokemon } from "../../hooks/use-fetch-pokemon";
 import {PokemonDetails} from "../pokemon-details/pokemon-details"
 import {SearchBar} from "../search-bar/search-bar"
+import {Loading} from "../loading/loading";
 
 export const PokemonSearch = () => {
 
@@ -9,7 +10,7 @@ export const PokemonSearch = () => {
     const {data, isLoading} = useFetchPokemon({identifier: searchText})
 
     if (!data || isLoading) {
-        return (<span>Loading</span>)
+        return (<Loading />)
     }
     
     return (
