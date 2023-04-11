@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useRateLimitChecker} from '../../hooks/use-rate-limit-checker';
-import {PokemonApiDetails} from '../../interfaces/common.interfaces';
+import {DisplayedPokemonDetails, PokemonEffects} from '../../interfaces/common.interfaces';
 
-export const PokemonDetails = (props: { data: PokemonApiDetails }) => {
-    const {data} = props;
+export const PokemonDetails = (props: { data: DisplayedPokemonDetails, abilities: PokemonEffects[] }) => {
+    const {data, abilities} = props;
 
     const textString = 'effect text from the APi will go here';
 
@@ -56,11 +56,7 @@ export const PokemonDetails = (props: { data: PokemonApiDetails }) => {
             </h2>
             <div>
                 <h3>Abilities:</h3>
-                {data?.abilities.map((x: { ability: { name: string } }) => <p key={x.ability.name}>{x.ability.name}</p>)}
-            </div>
-            <div>
-                <h3>Moves:</h3>
-                {data?.moves.map((x: { move: { name: string } }) => <p key={x.move.name}>{x.move.name}</p>)}
+                {abilities.map((x) => <p>{x.name}</p>)}
             </div>
             <div>
                 <h3>Types:</h3>

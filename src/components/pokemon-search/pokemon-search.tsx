@@ -7,7 +7,7 @@ import {Loading} from "../loading/loading";
 export const PokemonSearch = () => {
 
     const [searchText, setSearchText] = useState('1');
-    const {data, isLoading} = useFetchPokemon({identifier: searchText})
+    const [data, abilities, isLoading] = useFetchPokemon({identifier: searchText})
 
     if (!data || isLoading) {
         return (<Loading />)
@@ -16,7 +16,7 @@ export const PokemonSearch = () => {
     return (
         <React.Fragment>
             <SearchBar searchQuery={(res) => setSearchText(res)}/>
-            <PokemonDetails data={data} />
+            <PokemonDetails data={data} abilities={abilities} />
         </React.Fragment>
     )
 }
