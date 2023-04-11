@@ -26,7 +26,7 @@ export interface PokemonApiDetails {
 export interface PokemonEffects {
     name: string;
     effects: {
-        text: string[];
+        text: string;
     }
 }
 
