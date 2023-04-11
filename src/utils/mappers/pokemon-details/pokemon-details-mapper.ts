@@ -18,11 +18,11 @@ export const mapPokemonDetails = (details: PokemonApiDetails, abilities: Pokemon
 }
 
 export const mapPokemonEffects = (details: any) => {
-    const effectText = details['effect_entries'].map((x: any) => {
+    const effectText = details['effect_entries'].find((x: any) => {
         if(x.language.name === 'en') {
             return x['short_effect']
         }
-    })
+    })['short_effect'];
     const effects: PokemonEffects = {
         name: details['name'],
         effects: {

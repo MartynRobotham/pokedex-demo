@@ -6,25 +6,22 @@ export const PokemonDetails = (props: { data: DisplayedPokemonDetails, abilities
     const {data, abilities} = props;
 
     const [yodaEffects, setYodaEffects] = useState(false);
-    const [effectsText, setEffectsText] = useState('');
+    const [effectsText, setEffectsText] = useState<string[]>(abilities.map((y) => y.effects.text));
 
-    const [hitRateLimit] = useRateLimitChecker(effectsText)
+    const [hitRateLimit] = useRateLimitChecker('')
 
-    const translateYodaText = (inputTextString: string) => {
-        // TODO: Change this with effects text
+    useEffect(() => {
         if (yodaEffects && !hitRateLimit) {
-            fetch(`https://api.funtranslations.com/translate/yoda.json?text=${inputTextString}`)
-                .then((r) => {
-                    r.json().then((res) => {
-                        if (res.success) {
-                            setEffectsText(res.contents.translated)
-                            return res.contents.translated as string;
-                        }
-                    })
-                })
+            const promises = abilities.map(url =>
+                fetch(`https://api.funtranslations.com/translate/yoda.json?text=${url.effects.text}`)
+                    .then(response => response.json()));
+
+            Promise.all(promises).then(data => {
+                return setEffectsText(data.map((x) => x.contents.translated))
+            })
         }
-        return inputTextString;
-    }
+        return setEffectsText(abilities.map((y) => y.effects.text))
+    }, [yodaEffects]);
 
     return (
         <React.Fragment>
@@ -48,11 +45,11 @@ export const PokemonDetails = (props: { data: DisplayedPokemonDetails, abilities
             </h2>
             <div>
                 <h3>Abilities:</h3>
-                {abilities.map((x) => {
+                {abilities.map((x, idx) => {
                     return (
-                        <div key={x.name}>
+                        <div key={idx}>
                             <p>{x.name}</p>
-                            <p>{translateYodaText(x.effects.text)}</p>
+                            <p>{effectsText[idx]}</p>
                         </div>
                     )
                 })}
