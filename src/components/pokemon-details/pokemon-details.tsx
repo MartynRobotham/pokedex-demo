@@ -39,16 +39,16 @@ export const PokemonDetails = (props: { data: DisplayedPokemonDetails, abilities
             </div>
             <div>
                 <div className={'full-flex'}>
-                <h3>Abilities:</h3>
-                <form>
-                    <input
-                        onClick={() => setYodaEffects(!yodaEffects)}
-                        type="checkbox"
-                        id="yoda_effects"
-                        name="yoda"
-                        value={'Yoda'}/>
-                    <label htmlFor="vehicle1">Show effects in Yoda</label>
-                </form>
+                    <h3>Abilities:</h3>
+                    <form>
+                        <input
+                            onClick={() => setYodaEffects(!yodaEffects)}
+                            type="checkbox"
+                            id="yoda_effects"
+                            name="yoda"
+                            value={'Yoda'}/>
+                        <label htmlFor="vehicle1">Show effects in Yoda</label>
+                    </form>
                 </div>
                 {abilities.map((x, idx) => {
                     return (
