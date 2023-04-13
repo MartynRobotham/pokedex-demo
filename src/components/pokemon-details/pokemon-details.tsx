@@ -7,7 +7,7 @@ export const PokemonDetails = (props: { data: DisplayedPokemonDetails, abilities
     const {data, abilities} = props;
 
     const [yodaEffects, setYodaEffects] = useState(false);
-    const [effectsText, setEffectsText] = useState<string[]>(abilities.map((y) => y.effects.text));
+    const [effectsText, setEffectsText] = useState<string[]>([]);
 
     const [hitRateLimit] = useRateLimitChecker(effectsText)
 
@@ -21,7 +21,10 @@ export const PokemonDetails = (props: { data: DisplayedPokemonDetails, abilities
                 return setEffectsText(data.map((x) => x.contents.translated))
             })
         }
-        return setEffectsText(abilities.map((y) => y.effects.text))
+        const abilitiesText = abilities.map((y) => y.effects.text);
+        if((abilities && JSON.stringify(effectsText) !== JSON.stringify(abilitiesText)) || effectsText.length === 0) {
+            return setEffectsText(abilitiesText)
+        }
     }, [yodaEffects, abilities]);
 
     return (
